@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile Spreadsheet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        td[contenteditable] {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Mobile Spreadsheet</h1>
+    <table id="spreadsheet">
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>Apple</td>
+            <td contenteditable="true">1.2</td>
+            <td contenteditable="true">3</td>
+            <td>3.6</td>
+        </tr>
+        <tr>
+            <td>Orange</td>
+            <td contenteditable="true">0.8</td>
+            <td contenteditable="true">5</td>
+            <td>4.0</td>
+        </tr>
+    </table>
+    <br>
+    <button onclick="updateTotals()">Recalculate</button>
+    <script>
+        function updateTotals() {
+            const table = document.getElementById('spreadsheet');
+            for (let i = 1; i < table.rows.length; i++) {
+                const price = parseFloat(table.rows[i].cells[1].innerText) || 0;
+                const quantity = parseFloat(table.rows[i].cells[2].innerText) || 0;
+                table.rows[i].cells[3].innerText = (price * quantity).toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
+
